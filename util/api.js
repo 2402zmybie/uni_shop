@@ -1,5 +1,5 @@
 
-const BASE_URL = 'http://localhost:8082'
+const BASE_URL = 'https://www.wanandroid.com'
 
 export const myRequest = (options) => {
 	return new Promise((resolve,reject) => {
@@ -8,7 +8,7 @@ export const myRequest = (options) => {
 			method:options.method || 'GET',
 			data: options.data || {},
 			success:(res)=>{
-				if(res.data.status !== 0){
+				if(res.errorCode != 0){
 					return uni.showToast({
 						title:"获取数据失败"
 					})
