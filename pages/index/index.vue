@@ -37,7 +37,7 @@
 				//导航跳转
 				navs:[{
 					icon:'iconfont icon-ziyuan',
-					title:'老何超市',
+					title:'商品列表',
 					path:'/pages/goods/goods'
 				},{
 					icon:'iconfont icon-guanyuwomen',
