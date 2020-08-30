@@ -8,45 +8,22 @@
 		</swiper>
 		<!-- 导航区域 -->
 		<view class="nav">
-			<view class="nav_item">
-				<view class="iconfont icon-ziyuan"></view>
-				<text>老何超市</text>
-			</view>
-			<view class="nav_item">
-				<view class="iconfont icon-guanyuwomen"></view>
-				<text>联系我们</text>
-			</view>
-			<view class="nav_item">
-				<view class="iconfont icon-tupian"></view>
-				<text>社区图片</text>
-			</view>
-			<view class="nav_item">
-				<view class="iconfont icon-shipin"></view>
-				<text>学习视频</text>
+			<view class="nav_item"v-for="item in navs" :key="item.title" @click="navItemClick(item)">
+				<view :class="item.icon"></view>
+				<text>{{ item.title }}</text>
 			</view>
 		</view>
 		<!-- 推荐商品 -->
 		<view class="hot_goods">
 			<view class="title">推荐商品</view>
-			<!-- list -->
-			<view class="goods_list">
-				<view class="goods_item" v-for="(item,index) in goods" :key="item.id">
-					<image class="goods_item_image" :src="item.previewURL"></image>
-					<view class="price">
-						<text>${{ item.downloads }}</text>   
-						<text>${{ item.favorites }}</text>
-					</view>
-					<view class="name">
-						{{ item.user }}
-					</view>
-				</view>
-				
-			</view>
+			<!-- 给子组件传递数据 -->
+			<goods-list :goods="goods"></goods-list>
 		</view>
 	</view>
 </template>
 
 <script>
+	import goodsList from '../../components/goods-list/goods-list.vue'
 	export default {
 		data() {
 			return {
@@ -55,7 +32,26 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
+				//推荐商品
 				goods:[],
+				//导航跳转
+				navs:[{
+					icon:'iconfont icon-ziyuan',
+					title:'老何超市',
+					path:'/pages/goods/goods'
+				},{
+					icon:'iconfont icon-guanyuwomen',
+					title:'联系我们',
+					path:'/pages/contact/contact'
+				},{
+					icon:'iconfont icon-tupian',
+					title:'社区图片',
+					path:'/pages/pics/pics'
+				},{
+					icon:'iconfont icon-shipin',
+					title:'学习视频',
+					path:'/pages/videos/videos'
+				}]
 			}
 		},
 		//请求数据
@@ -93,7 +89,15 @@
 						console.log(this.goods.length)
 					}
 				})
+			},
+			navItemClick(item) {
+				uni.navigateTo({
+					url:item.path
+				})
 			}
+		},
+		components:{
+			'goods-list':goodsList
 		}
 	}
 </script>
@@ -145,44 +149,7 @@
 				color: $shop-color;
 				margin: 7px 0;
 			}
-			.goods_list {
-				padding: 0 15rpx;
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				// 条目, 给盒子设置padding之后盒子会被撑大,要想不被撑大,则设置box-sizing: border-box;
-				.goods_item {
-					background: white;
-					width: 355rpx;
-					margin: 10rpx 0;
-					padding: 15rpx;
-					box-sizing: border-box;
-					// 条目图片
-					.goods_item_image {
-						width: 284rpx;
-						height: 150px;
-						display: block;
-						margin: 0 auto;
-					}
-					.price{
-						color: $shop-color;
-						font-size: 36rpx;
-						margin: 20rpx 0 5rpx 0;
-						text:nth-child(2) {
-							color: #ccc;
-							font-size: 28rpx;
-							margin-left: 10rpx;
-							text-decoration: line-through;
-						}
-					}
-					.name {
-						font-size: 28rpx;
-						line-height: 50rpx;
-						padding-bottom: 15rpx;
-						padding-top: 10rpx;
-					}
-				}
-			}
+			
 		}
 	}
 </style>
