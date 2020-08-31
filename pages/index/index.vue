@@ -17,7 +17,7 @@
 		<view class="hot_goods">
 			<view class="title">推荐商品</view>
 			<!-- 给子组件传递数据 -->
-			<goods-list :goods="goods"></goods-list>
+			<goods-list :goods="goods" @goodsItemClick="goGoodsDetail"></goods-list>
 		</view>
 	</view>
 </template>
@@ -93,6 +93,11 @@
 			navItemClick(item) {
 				uni.navigateTo({
 					url:item.path
+				})
+			},
+			goGoodsDetail(item) {
+				uni.navigateTo({
+					url:'../goods-detail/goods-detail?url=' + item.pageURL
 				})
 			}
 		},

@@ -40,6 +40,12 @@
 				"navigationBarTitleText":"新闻详情"
 			}
         }
+        ,{
+            "path" : "pages/goods-detail/goods-detail",
+            "style" : {
+				"navigationBarTitleText":"商品详情"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

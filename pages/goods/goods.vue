@@ -1,6 +1,6 @@
 <template>
 	<view class="goods_list" >
-		<goods-list :goods="goods"></goods-list>
+		<goods-list :goods="goods" @goodsItemClick="goGoodsDetail"></goods-list>
 		<view class="over-bootom" v-if="flag">-----------我是有底线的-----------</view>
 	</view>
 </template>
@@ -47,6 +47,11 @@
 						//如果有callBack 则调用callBack
 						callBack && callBack()
 					}
+				})
+			},
+			goGoodsDetail(item) {
+				uni.navigateTo({
+					url:'../goods-detail/goods-detail?url=' + item.pageURL
 				})
 			}
 		}

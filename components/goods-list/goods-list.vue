@@ -2,7 +2,7 @@
 	<view>
 		<!-- list -->
 		<view class="goods_list">
-			<view class="goods_item" v-for="(item,index) in goods" :key="item.id">
+			<view class="goods_item" v-for="(item,index) in goods" :key="item.id" @click="navigator(item)">
 				<image class="goods_item_image" :src="item.previewURL"></image>
 				<view class="price">
 					<text>${{ item.downloads }}</text>
@@ -20,6 +20,11 @@
 	export default {
 		//接受父组件给子组件传递数据
 		props:['goods'],
+		methods:{
+			navigator(item) {
+				this.$emit('goodsItemClick',item)
+			}
+		}
 	}
 </script>
 
