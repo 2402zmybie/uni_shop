@@ -10,7 +10,10 @@
 			"path":"pages/member/member"
 		},
 		{
-			"path":"pages/news/news"
+			"path":"pages/news/news",
+			"style":{
+				"enablePullDownRefresh":true
+			}
 		}
 	    ,{
             "path" : "pages/goods/goods",

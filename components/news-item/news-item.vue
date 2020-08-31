@@ -1,11 +1,12 @@
 <template>
 	<view>
-		<view class="news_item" v-for="(item) in list" :key="item.id" @click="goToNewsWeb(item)">
+		<view class="news_item" v-for="(item,index) in list" :key="index" @click="navigator(item)">
 			<image :src="item.envelopePic"></image>
 			<view class="right">
 				<view class="title">{{ item.desc }}</view>
 				<view class="info"> 
-					<text>发表时间: {{ item.niceDate }}</text>
+					<!-- <text>发表时间: {{ item.niceDate }}</text> -->
+					<text>发表时间: {{ item.shareDate | formatDate}}</text>
 					<text>浏览: {{ item.superChapterId }}</text>
 				</view>
 			</view>
@@ -16,12 +17,21 @@
 <script>
 	export default {
 		props:['list'],
+		//使用过滤器,格式化时间  字符串
+		filters:{
+			formatDate(date) {
+				const nDate = new Date(date)
+				const year = nDate.getFullYear()
+				const month = nDate.getMonth().toString().padStart(2,0)
+				const day = nDate.getDay().toString().padStart(2,0)
+				return year + '-' + month + '-' + day
+			}
+		},
 		methods:{
-			goToNewsWeb(item) {
-				console.log("条目")
-				uni.navigateTo({
-					url:'./news-web-detail/news-web-detail?url=' + item.link
-				})
+			navigator(item) {
+				//给父组件发射方法
+				console.log('子组件条目点击了')
+				this.$emit('itemClick',item)
 			}
 		}
 	}
