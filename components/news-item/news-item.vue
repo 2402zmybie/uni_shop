@@ -40,7 +40,8 @@
 <style lang="scss">
 	.news_item {
 		display: flex;
-		padding: 10rpx 20rpx;
+		padding: 10rpx 0;
+		margin: 0 20rpx;
 		border-bottom: 1px solid $shop-color;
 		image {
 			min-width: 200rpx;
